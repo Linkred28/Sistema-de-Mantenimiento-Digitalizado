@@ -648,57 +648,44 @@
             ];
 
             function updateView(targetId) {
-                if (!validTargets.includes(targetId)) {
-                    targetId = 'introduccion';
-                }
+                // Ensure targetId is valid, default to 'introduccion' if not
+                const finalTargetId = validTargets.includes(targetId) ? targetId : 'introduccion';
 
                 navButtons.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.target === targetId);
+                    btn.classList.toggle('active', btn.dataset.target === finalTargetId);
                 });
                 
                 contentSections.forEach(section => {
-                    section.classList.toggle('active', section.id === targetId);
+                    section.classList.toggle('active', section.id === finalTargetId);
                 });
             }
 
-            function handleHashChange() {
+            function handleNavigation() {
                 const targetId = window.location.hash.substring(1);
                 updateView(targetId);
             }
 
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const targetId = button.dataset.target;
-                    const targetElement = document.getElementById(targetId);
-                    
-                    if (targetElement) {
-                        targetElement.removeAttribute('id');
-                    }
-                    
-                    window.location.hash = targetId;
-                    
-                    if (targetElement) {
-                        targetElement.setAttribute('id', targetId);
-                    }
+                    // Changing the hash will trigger the 'hashchange' event
+                    window.location.hash = button.dataset.target;
                 });
             });
 
-            window.addEventListener('hashchange', handleHashChange);
+            // Listen for hash changes to handle back/forward buttons and clicks
+            window.addEventListener('hashchange', handleNavigation);
             
+            // Initial load logic
             function initialLoad() {
                 let targetId = window.location.hash.substring(1);
+
+                // If the hash is missing or invalid, set it to the default
                 if (!validTargets.includes(targetId)) {
                     targetId = 'introduccion';
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.removeAttribute('id');
-                    }
-                    window.location.replace('#' + targetId);
-                    if (targetElement) {
-                        targetElement.setAttribute('id', targetId);
-                    }
                 }
-                handleHashChange();
+                
+                // Directly render the correct view on initial load to ensure visibility
+                updateView(targetId);
             }
 
             initialLoad();
