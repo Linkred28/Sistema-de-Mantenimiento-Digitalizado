@@ -42,7 +42,7 @@
         .header {
             background-color: var(--midnight-navy);
             color: var(--smoke-white);
-            padding: 2rem 0;
+            padding: 2.5rem 0;
             text-align: center;
         }
 
@@ -60,24 +60,6 @@
             color: var(--smoke-white);
             opacity: 0.8;
             margin-top: 0.5rem;
-        }
-
-        .content-section .pills-container {
-            display: flex;
-            justify-content: flex-start;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        .content-section .pill {
-            background-color: var(--smoke-white);
-            color: var(--slate-gray);
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            border: 1px solid #e2e8f0;
         }
 
         .main-nav {
@@ -125,6 +107,11 @@
             transform: translateY(-2px);
         }
 
+        .nav-button:focus-visible {
+            outline: 2px solid var(--sapphire-blue);
+            outline-offset: 2px;
+        }
+
         .nav-button.active {
             background-color: var(--sapphire-blue);
             color: var(--white);
@@ -135,32 +122,33 @@
         main {
             padding: 2.5rem 0;
         }
-        
-        .breadcrumb {
-            text-align: center;
-            font-weight: 600;
-            color: var(--midnight-navy);
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-        }
 
         .content-panel {
             background-color: var(--white);
-            padding: 2.5rem;
             border-radius: 16px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
             min-height: 400px;
+            position: relative;
         }
 
         .content-section {
-            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 2.5rem;
             opacity: 0;
-            transition: opacity 0.4s ease-in-out;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
         }
 
         .content-section.active {
-            display: block;
             opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.3s ease-in-out;
         }
         
         .content-section h3 {
@@ -169,12 +157,16 @@
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
             gap: 0.75rem;
         }
         
         .content-section p, .content-section ul {
             margin-bottom: 1rem;
             max-width: 75ch;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .content-section ul {
@@ -203,6 +195,81 @@
             stroke-width: 1.5;
         }
 
+        .intro-text {
+            text-align: center;
+            max-width: 70ch;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .objectives-container {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem auto;
+            flex-wrap: wrap;
+        }
+
+        .objective-card {
+            flex-basis: 260px;
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--smoke-white);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .objective-card h4 {
+            font-size: 1.1rem;
+            color: var(--midnight-navy);
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .objective-icon {
+            width: 40px;
+            height: 40px;
+            stroke: var(--sapphire-blue);
+        }
+
+        .pills-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        .pill {
+            background-color: var(--smoke-white);
+            color: var(--slate-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
+        }
+
+        .header .pill {
+            background-color: transparent;
+            color: var(--smoke-white);
+            opacity: 0.8;
+            border-color: rgba(244, 246, 248, 0.4);
+            font-weight: 400;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .header .pill:hover {
+            background-color: rgba(244, 246, 248, 0.1);
+            border-color: rgba(244, 246, 248, 0.8);
+            opacity: 1;
+        }
+
         .actions-container {
             display: flex;
             justify-content: center;
@@ -229,11 +296,55 @@
             border-color: var(--slate-gray);
             background-color: #f1f5f9;
         }
+        
+        .action-button:focus-visible {
+            outline: 2px solid var(--sapphire-blue);
+            outline-offset: 2px;
+        }
 
         .action-button .icon {
             width: 20px;
             height: 20px;
             stroke: currentColor;
+        }
+        
+        .kpi-tooltip {
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dotted var(--slate-gray);
+        }
+
+        .kpi-tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--midnight-navy);
+            color: var(--white);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            line-height: 1.4;
+            white-space: normal;
+            width: 220px;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            z-index: 10;
+            pointer-events: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .kpi-tooltip em {
+            font-style: italic;
+        }
+
+        .kpi-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
         }
 
         @media (max-width: 768px) {
@@ -243,13 +354,16 @@
             .header h2 {
                 font-size: 1.1rem;
             }
+            .header {
+                padding: 2rem 0;
+            }
             .main-nav {
                 padding: 1rem 0;
             }
             .container {
                 padding: 0 1rem;
             }
-            .content-panel {
+            .content-section {
                 padding: 1.5rem;
             }
             .content-section h3 {
@@ -276,7 +390,7 @@
                 background-color: var(--white);
                 color: #000;
             }
-            .header, .main-nav, .actions-container, .breadcrumb {
+            .header, .main-nav, .actions-container {
                 display: none;
             }
             main {
@@ -291,10 +405,13 @@
                 border: none;
                 border-radius: 0;
                 padding: 0;
+                position: static;
             }
             .content-section {
                 display: block !important;
                 opacity: 1 !important;
+                visibility: visible !important;
+                position: relative !important;
                 page-break-before: always;
             }
             .content-section:first-of-type {
@@ -313,6 +430,11 @@
         <div class="container">
             <h1>Sistema de Mantenimiento Digitalizado</h1>
             <h2>European LifeStyle Suites & Gallery</h2>
+            <div class="pills-container">
+                <span class="pill">Ventaja Competitiva</span>
+                <span class="pill">Control & Trazabilidad</span>
+                <span class="pill">Impacto en Rentabilidad & Reputación</span>
+            </div>
         </div>
     </header>
 
@@ -334,7 +456,6 @@
 
     <main>
         <div class="container">
-            <div id="breadcrumb" class="breadcrumb no-print" aria-live="polite"></div>
             <div class="content-panel">
                 <!-- Section 1: Introduccion -->
                 <section id="introduccion" class="content-section">
@@ -342,12 +463,26 @@
                         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                         Introducción y Resumen Ejecutivo
                     </h3>
-                    <p>Esta propuesta detalla la implementación de un Sistema de Gestión de Mantenimiento (CMMS) diseñado para optimizar operaciones, mejorar la experiencia del huésped y proteger la rentabilidad del hotel. A continuación, encontrará un análisis de la solución, su impacto y el retorno de valor esperado.</p>
-                    <div class="pills-container">
-                        <span class="pill">Ventaja Competitiva</span>
-                        <span class="pill">Control & Trazabilidad</span>
-                        <span class="pill">Impacto en Rentabilidad & Reputación</span>
+                    
+                    <p class="intro-text">Esta propuesta detalla la implementación de un Sistema de Gestión de Mantenimiento (CMMS) diseñado para:</p>
+
+                    <div class="objectives-container">
+                        <div class="objective-card">
+                            <svg class="icon objective-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <h4>Optimizar Operaciones</h4>
+                        </div>
+                        <div class="objective-card">
+                            <svg class="icon objective-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
+                            <h4>Mejorar la Experiencia del Huésped</h4>
+                        </div>
+                        <div class="objective-card">
+                            <svg class="icon objective-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182.553-.44 1.28-.659 2.003-.659 1.5 0 2.836.896 3.467 2.23" /></svg>
+                            <h4>Proteger la Rentabilidad del Hotel</h4>
+                        </div>
                     </div>
+
+                    <p class="intro-text">A continuación, encontrará un análisis de la solución, su impacto y el <strong>retorno de valor esperado</strong>.</p>
+                    
                 </section>
 
                 <!-- Section 2: Contexto -->
@@ -356,24 +491,24 @@
                         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
                         Contexto & Imperativo Estratégico
                     </h3>
-                    <p>La gestión de mantenimiento actual, basada en procesos manuales, presenta riesgos significativos que impactan directamente la operación y la percepción de la marca. La falta de un sistema centralizado conduce a ineficiencias y pérdida de oportunidades.</p>
+                    <p>La gestión de mantenimiento actual, basada en procesos manuales, presenta <strong><em>riesgos significativos</em></strong> que impactan directamente la operación y la percepción de la marca. La falta de un sistema centralizado conduce a ineficiencias y pérdida de oportunidades.</p>
                     <ul>
-                        <li><strong>Riesgos del Enfoque Reactivo:</strong> La dependencia de métodos manuales carece de trazabilidad, aumenta el tiempo de inactividad (downtime) de habitaciones y activos, y genera una experiencia inconsistente que se refleja en reseñas negativas.</li>
-                        <li><strong>Ventajas del Enfoque Proactivo:</strong> Implementar un sistema proactivo y digitalizado permite anticipar fallos, optimizar recursos y asegurar que la excelencia del servicio se mantenga consistentemente, protegiendo así los ingresos y la reputación del hotel.</li>
+                        <li><strong>Riesgos del Enfoque Reactivo:</strong> La dependencia de métodos manuales carece de <strong><em>trazabilidad</em></strong>, aumenta el <strong><em>tiempo de inactividad (downtime)</em></strong> de habitaciones y activos, y genera una experiencia inconsistente que se refleja en <strong><em>reseñas negativas</em></strong>.</li>
+                        <li><strong>Ventajas del Enfoque Proactivo:</strong> Implementar un <strong><em>enfoque proactivo y digitalizado</em></strong> permite anticipar fallos, optimizar recursos y asegurar que la excelencia del servicio se mantenga consistentemente, <strong><em>protegiendo así los ingresos y la reputación</em></strong> del hotel.</li>
                     </ul>
                 </section>
 
                 <!-- Section 3: Solución -->
                 <section id="solucion" class="content-section">
                     <h3>
-                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                         Solución Digital y Sistematizada (CMMS)
                     </h3>
-                    <p>Proponemos una plataforma CMMS centralizada que transforma el mantenimiento de un centro de costos reactivo a un motor de eficiencia y calidad. El sistema integra todos los aspectos del ciclo de mantenimiento.</p>
+                    <p>Proponemos una <strong><em>plataforma CMMS centralizada</em></strong> que transforma el mantenimiento de un centro de costos reactivo a un <strong><em>motor de eficiencia y calidad</em></strong>. El sistema integra todos los aspectos del ciclo de mantenimiento.</p>
                     <ul>
                         <li><strong>Mantenimiento Preventivo:</strong> Calendario automatizado con alertas para inspecciones y tareas recurrentes, asegurando la operatividad continua de los activos críticos.</li>
-                        <li><strong>Mantenimiento Correctivo:</strong> Gestión de tickets de incidencias con asignación de responsables, Service Level Agreements (SLAs) y seguimiento en tiempo real desde su reporte hasta su cierre.</li>
-                        <li><strong>Historial y Evidencias:</strong> Cada activo cuenta con un historial completo de intervenciones, incluyendo fotos y documentación, lo que permite un análisis de causa raíz y mejora continua, resultando en una reducción drástica del downtime.</li>
+                        <li><strong>Mantenimiento Correctivo:</strong> Gestión de tickets de incidencias con asignación de responsables, <strong><em>Service Level Agreements (SLAs)</em></strong> y seguimiento en tiempo real desde su reporte hasta su cierre.</li>
+                        <li><strong>Historial y Evidencias:</strong> Cada activo cuenta con un historial completo de intervenciones, incluyendo fotos y documentación, lo que permite un análisis de causa raíz y mejora continua, resultando en una <strong><em>reducción drástica del downtime</em></strong>.</li>
                     </ul>
                 </section>
 
@@ -383,11 +518,11 @@
                         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
                         Impacto en la Experiencia del Huésped
                     </h3>
-                    <p>Un mantenimiento eficiente es invisible para el huésped, pero su ausencia es memorablemente negativa. Nuestro sistema está diseñado para que la excelencia operativa se traduzca directamente en satisfacción.</p>
+                    <p>Un mantenimiento eficiente es <strong><em>invisible para el huésped</em></strong>, pero su ausencia es memorablemente negativa. Nuestro sistema está diseñado para que la <strong><em>excelencia operativa</em></strong> se traduzca directamente en <strong><em>satisfacción</em></strong>.</p>
                     <ul>
                         <li><strong>Intervenciones Discretas:</strong> Planificación de tareas en horarios de baja ocupación o en los intervalos entre check-in y check-out para minimizar cualquier molestia.</li>
                         <li><strong>Respuesta Inmediata:</strong> Las incidencias reportadas por los huéspedes o el personal se canalizan instantáneamente al técnico adecuado, reduciendo drásticamente los tiempos de espera.</li>
-                        <li><strong>Coordinación Fluida:</strong> El sistema integra la comunicación entre Recepción, Housekeeping y Mantenimiento, asegurando que todos los equipos trabajen en sincronía para resolver problemas antes de que afecten al huésped. Esto se traduce en mejores reseñas y fidelización.</li>
+                        <li><strong>Coordinación Fluida:</strong> El sistema integra la comunicación entre Recepción, Housekeeping y Mantenimiento, asegurando que todos los equipos trabajen en sincronía para resolver problemas antes de que afecten al huésped. Esto se traduce en <strong><em>mejores reseñas y fidelización</em></strong>.</li>
                     </ul>
                 </section>
 
@@ -397,7 +532,7 @@
                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                         Colaboración Activa del Hotel
                     </h3>
-                    <p>El éxito de la implementación se basa en un modelo de co-creación. Trabajaremos como un socio estratégico, no como un simple proveedor, requiriendo una colaboración estrecha con el equipo del hotel.</p>
+                    <p>El éxito de la implementación se basa en un <strong><em>modelo de co-creación</em></strong>. Trabajaremos como un <strong><em>socio estratégico</em></strong>, no como un simple proveedor, requiriendo una colaboración estrecha con el equipo del hotel.</p>
                     <ul>
                         <li><strong>Relevamiento Inicial:</strong> Necesitamos acceso a inventarios de instalaciones y activos, diagramas de procesos actuales y organigrama del equipo de mantenimiento y operaciones.</li>
                         <li><strong>Documentación y Presupuestos:</strong> Es fundamental contar con la documentación técnica de los equipos, así como con los presupuestos de mantenimiento históricos para establecer una línea base.</li>
@@ -411,39 +546,39 @@
                         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                         KPIs & Gobernanza
                     </h3>
-                    <p>La gestión se basará en datos objetivos para una toma de decisiones informada. Proponemos un modelo de gobernanza claro con indicadores clave de rendimiento (KPIs) para medir el éxito.</p>
+                    <p>La gestión se basará en <strong><em>datos objetivos</em></strong> para una <strong><em>toma de decisiones informada</em></strong>. Proponemos un modelo de gobernanza claro con <strong><em>indicadores clave de rendimiento (KPIs)</em></strong> para medir el éxito.</p>
                     <ul>
-                        <li><strong>Indicadores Clave (KPIs):</strong> Se monitorearán el Tiempo Medio de Reparación (MTTR), % de Mantenimiento Preventivo vs. Correctivo, Índice de fallas y reincidencias, Gasto vs. Presupuesto, y la correlación con la Satisfacción del Huésped.</li>
+                        <li><strong>Indicadores Clave (KPIs):</strong> Se monitorearán el <strong class="kpi-tooltip" data-tooltip="Mide el tiempo promedio desde que se reporta una avería hasta que se soluciona completamente. Un MTTR bajo indica alta eficiencia."><em>Tiempo Medio de Reparación (MTTR)</em></strong>, <strong class="kpi-tooltip" data-tooltip="Compara el esfuerzo dedicado a prevenir fallos frente al dedicado a corregirlos. Un mayor % preventivo es ideal."><em>% de Mantenimiento Preventivo vs. Correctivo</em></strong>, <strong class="kpi-tooltip" data-tooltip="Registra la frecuencia con la que fallan los activos y si las reparaciones son duraderas. Ayuda a identificar problemas crónicos."><em>Índice de fallas y reincidencias</em></strong>, <strong class="kpi-tooltip" data-tooltip="Controla los costos reales del mantenimiento en comparación con lo planificado, asegurando la disciplina financiera."><em>Gasto vs. Presupuesto</em></strong>, y la correlación con la <strong class="kpi-tooltip" data-tooltip="Correlaciona las métricas de mantenimiento con las puntuaciones y reseñas de los huéspedes para medir el impacto directo en la experiencia."><em>Satisfacción del Huésped</em></strong>.</li>
                         <li><strong>Dashboard Ejecutivo:</strong> Un panel de control simple y visual permitirá al management tener una visión clara del rendimiento del área en tiempo real.</li>
-                        <li><strong>Cadencia de Seguimiento:</strong> Se establecerán reuniones periódicas (quincenales/mensuales) para revisar los KPIs, identificar desviaciones y definir planes de acción, asegurando un ciclo de mejora continua.</li>
+                        <li><strong>Cadencia de Seguimiento:</strong> Se establecerán reuniones periódicas (quincenales/mensuales) para revisar los KPIs, identificar desviaciones y definir planes de acción, asegurando un ciclo de <strong><em>mejora continua</em></strong>.</li>
                     </ul>
                 </section>
 
                 <!-- Section 7: Herramientas & Metodología -->
                 <section id="herramientas" class="content-section">
                     <h3>
-                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 01.801 0l3.535 3.536a.563.563 0 010 .801l-2.471 2.471m0 0a.563.563 0 01-.801 0l-3.535-3.536a.563.563 0 010-.801l2.471-2.471m-4.586 5.32L5.434 9.577a3.375 3.375 0 010-4.773l2.063-2.063a.563.563 0 01.801 0l3.535 3.536a.563.563 0 010 .801l-2.063 2.063a3.375 3.375 0 01-4.773 0z" /></svg>
                         Herramientas & Metodología
                     </h3>
-                    <p>La solución combina tecnología de punta con una metodología ágil que garantiza una implementación rápida, adaptable y centrada en la generación de valor temprano.</p>
+                    <p>La solución combina <strong><em>tecnología de punta</em></strong> con una <strong><em>metodología ágil</em></strong> que garantiza una implementación rápida, adaptable y centrada en la <strong><em>generación de valor temprano</em></strong>.</p>
                     <ul>
-                        <li><strong>Tecnología:</strong> Se implementará un CMMS líder en el mercado, accesible desde la nube y con una aplicación móvil intuitiva para que los técnicos gestionen órdenes de trabajo en terreno.</li>
-                        <li><strong>Digitalización de Procesos:</strong> Se utilizarán formularios y checklists digitales para estandarizar las inspecciones y tareas, asegurando la calidad y capturando datos de forma estructurada.</li>
-                        <li><strong>Enfoque Ágil:</strong> Partiremos con un Producto Mínimo Viable (MVP) enfocado en los procesos más críticos, para luego iterar y expandir la funcionalidad en ciclos cortos, incorporando el feedback del equipo y asegurando una alta tasa de adopción mediante capacitación continua.</li>
+                        <li><strong>Tecnología:</strong> Se implementará un <strong><em>CMMS líder en el mercado</em></strong>, accesible desde la nube y con una <strong><em>aplicación móvil intuitiva</em></strong> para que los técnicos gestionen órdenes de trabajo en terreno.</li>
+                        <li><strong>Digitalización de Procesos:</strong> Se utilizarán <strong><em>formularios y checklists digitales</em></strong> para estandarizar las inspecciones y tareas, asegurando la calidad y capturando datos de forma estructurada.</li>
+                        <li><strong>Enfoque Ágil:</strong> Partiremos con un <strong><em>Producto Mínimo Viable (MVP)</em></strong> enfocado en los procesos más críticos, para luego iterar y expandir la funcionalidad en ciclos cortos, incorporando el feedback del equipo y asegurando una <strong><em>alta tasa de adopción</em></strong> mediante capacitación continua.</li>
                     </ul>
                 </section>
 
                 <!-- Section 8: Inversión & Retorno -->
                 <section id="inversion" class="content-section">
                     <h3>
-                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2.01v.01M12 18v-1m0-1v-1m0 3V20m0-2.01v.01M12 4.01v.01M4 12H3m1-1h.01M4 10h-1M4 14h-1m18-2h-1m1 1h-.01M20 10h1M20 14h1M10 4V3m1 1v-.01M14 4V3m1 1v-.01M10 20v-1m1 1v-.01M14 20v-1m1 1v-.01" /></svg>
+                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182.553-.44 1.28-.659 2.003-.659 1.5 0 2.836.896 3.467 2.23" /></svg>
                         Inversión & Retorno de Valor
                     </h3>
-                    <p>Esta propuesta representa una inversión en eficiencia y protección de la marca, no un gasto. El modelo es un servicio mensual que incluye tecnología y acompañamiento estratégico.</p>
+                    <p>Esta propuesta representa una <strong><em>inversión en eficiencia y protección de la marca</em></strong>, no un gasto. El modelo es un <strong><em>servicio mensual</em></strong> que incluye tecnología y acompañamiento estratégico.</p>
                     <ul>
-                        <li><strong>Inversión Mensual:</strong> USD 960 (incluye IVA). Este valor corresponde a 24 horas mensuales de consultoría especializada para configuración, soporte, optimización continua, capacitación y generación de reportes de KPIs.</li>
-                        <li><strong>Retorno de Valor (ROI):</strong> Se estima un ahorro de entre el 12% y el 18% en costos de mantenimiento anuales gracias a la optimización de recursos y la reducción de reparaciones correctivas costosas.</li>
-                        <li><strong>Beneficios Intangibles:</strong> El mayor retorno se encuentra en la reducción del downtime de habitaciones, la protección de la reputación online (mejores reseñas) y, en consecuencia, la defensa de la tarifa promedio y los ingresos.</li>
+                        <li><strong>Inversión Mensual:</strong> <strong><em>USD 960 (incluye IVA)</em></strong>. Este valor corresponde a 24 horas mensuales de <strong><em>consultoría especializada</em></strong> para configuración, soporte, optimización continua, capacitación y generación de reportes de KPIs.</li>
+                        <li><strong>Retorno de Valor (ROI):</strong> Se proyecta una <strong><em>optimización significativa de los costos</em></strong> de mantenimiento anuales, gracias a la <strong><em>gestión eficiente de recursos</em></strong> y la <strong><em>reducción de reparaciones correctivas costosas</em></strong>.</li>
+                        <li><strong>Beneficios Intangibles:</strong> El mayor retorno se encuentra en la <strong><em>reducción del downtime</em></strong> de habitaciones, la <strong><em>protección de la reputación online</em></strong> (mejores reseñas) y, en consecuencia, la defensa de la tarifa promedio y los ingresos.</li>
                     </ul>
                 </section>
                 
@@ -453,11 +588,11 @@
                         <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                         Conclusión y Próximos Pasos
                     </h3>
-                    <p>La implementación de un sistema de mantenimiento digitalizado es un paso decisivo para llevar la gestión de European LifeStyle Suites & Gallery al siguiente nivel. Es una apuesta por la eficiencia, el control y, sobre todo, por una experiencia de huésped impecable.</p>
+                    <p>La implementación de un sistema de mantenimiento digitalizado es un <strong><em>paso decisivo</em></strong> para llevar la gestión de European LifeStyle Suites & Gallery al siguiente nivel. Es una apuesta por la eficiencia, el control y, sobre todo, por una <strong><em>experiencia de huésped impecable</em></strong>.</p>
                     <ul>
-                        <li><strong>Solución Colaborativa:</strong> Proponemos una alianza estratégica para construir una solución a medida, sostenible y que evolucione con el hotel.</li>
-                        <li><strong>Medible y Sostenible:</strong> El enfoque basado en datos y KPIs asegura que la inversión se traduzca en resultados tangibles y demostrables.</li>
-                        <li><strong>"Excelencia que se mantiene":</strong> Pasamos de apagar incendios a un modelo de previsibilidad y control que consolida la reputación de la marca. El próximo paso es agendar una sesión de trabajo para definir el alcance del MVP.</li>
+                        <li><strong>Solución Colaborativa:</strong> Proponemos una <strong><em>alianza estratégica</em></strong> para construir una solución a medida, sostenible y que evolucione con el hotel.</li>
+                        <li><strong>Medible y Sostenible:</strong> El enfoque basado en datos y KPIs asegura que la inversión se traduzca en <strong><em>resultados tangibles y demostrables</em></strong>.</li>
+                        <li><strong>"Excelencia que se mantiene":</strong> Pasamos de apagar incendios a un modelo de <strong><em>previsibilidad y control</em></strong> que consolida la reputación de la marca. El próximo paso es agendar una sesión de trabajo para definir el alcance del MVP.</li>
                     </ul>
                 </section>
             </div>
@@ -478,22 +613,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             const navButtons = document.querySelectorAll('.nav-button');
             const contentSections = document.querySelectorAll('.content-section');
-            const breadcrumb = document.getElementById('breadcrumb');
             const copyButton = document.getElementById('copyButton');
             const printButton = document.getElementById('printButton');
             
-            const sectionTitles = {
-                introduccion: "1. Introducción y Resumen Ejecutivo",
-                contexto: "2. Contexto & Imperativo Estratégico",
-                solucion: "3. Solución Digital y Sistematizada (CMMS)",
-                experiencia: "4. Impacto en la Experiencia del Huésped",
-                colaboracion: "5. Colaboración Activa del Hotel",
-                kpis: "6. KPIs & Gobernanza",
-                herramientas: "7. Herramientas & Metodología",
-                inversion: "8. Inversión & Retorno de Valor",
-                conclusion: "9. Conclusión y Próximos Pasos"
-            };
-            const validTargets = Object.keys(sectionTitles);
+            const validTargets = [
+                'introduccion', 'contexto', 'solucion', 'experiencia', 'colaboracion', 
+                'kpis', 'herramientas', 'inversion', 'conclusion'
+            ];
 
             function updateView(targetId) {
                 if (!validTargets.includes(targetId)) {
@@ -507,8 +633,6 @@
                 contentSections.forEach(section => {
                     section.classList.toggle('active', section.id === targetId);
                 });
-
-                breadcrumb.textContent = sectionTitles[targetId] || '';
             }
 
             function handleHashChange() {
@@ -521,14 +645,12 @@
                     const targetId = button.dataset.target;
                     const targetElement = document.getElementById(targetId);
                     
-                    // Temporarily remove ID to prevent the browser from jumping.
                     if (targetElement) {
                         targetElement.removeAttribute('id');
                     }
                     
-                    window.location.hash = targetId; // This triggers the hashchange listener.
+                    window.location.hash = targetId;
                     
-                    // Restore ID for deep-linking.
                     if (targetElement) {
                         targetElement.setAttribute('id', targetId);
                     }
@@ -537,13 +659,10 @@
 
             window.addEventListener('hashchange', handleHashChange);
             
-            // Handle initial page load.
             function initialLoad() {
                 let targetId = window.location.hash.substring(1);
                 if (!validTargets.includes(targetId)) {
                     targetId = 'introduccion';
-                    // Use replace to set a default hash without adding to history,
-                    // and use the ID removal trick to prevent the initial jump.
                     const targetElement = document.getElementById(targetId);
                     if (targetElement) {
                         targetElement.removeAttribute('id');
@@ -553,7 +672,6 @@
                         targetElement.setAttribute('id', targetId);
                     }
                 }
-                // Update the view based on the final hash.
                 handleHashChange();
             }
 
