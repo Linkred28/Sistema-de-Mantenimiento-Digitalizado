@@ -42,29 +42,30 @@
         .header {
             background-color: var(--midnight-navy);
             color: var(--smoke-white);
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             text-align: center;
+            transition: padding 0.3s ease-in-out;
         }
 
         .header h1 {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
             line-height: 1.2;
-            max-width: 25ch;
+            max-width: 35ch;
             margin: 0 auto;
         }
 
         .header h2 {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 400;
             color: var(--smoke-white);
             opacity: 0.8;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
         }
 
         .main-nav {
             background-color: var(--white);
-            padding: 1.25rem 0;
+            padding: 0.75rem 0;
             border-bottom: 1px solid #e2e8f0;
             text-align: center;
             position: sticky;
@@ -262,7 +263,7 @@
             justify-content: center;
             gap: 0.75rem;
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-top: 1.25rem;
         }
 
         .pill {
@@ -330,15 +331,6 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.75rem;
-            }
-            .header h2 {
-                font-size: 1rem;
-            }
-            .header {
-                padding: 1.5rem 0;
-            }
             .main-nav {
                 padding: 1rem 0;
             }
@@ -367,6 +359,33 @@
             }
             .nav-button {
                 display: flex;
+            }
+            .header {
+                padding: 1.25rem 0;
+            }
+            .header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 2rem;
+            }
+            .header-branding {
+                text-align: left;
+            }
+            .header h1 {
+                font-size: 1.65rem;
+                max-width: 45ch;
+                margin: 0;
+            }
+            .header h2 {
+                margin-top: 0.25rem;
+                max-width: 45ch;
+            }
+            .header .pills-container {
+                margin-top: 0;
+                flex-shrink: 0;
+                justify-content: flex-end;
+                max-width: 320px;
             }
         }
 
@@ -416,8 +435,10 @@
 
     <header class="header no-print">
         <div class="container">
-            <h1>Sistema de Mantenimiento Digitalizado</h1>
-            <h2>European LifeStyle Suites & Gallery</h2>
+            <div class="header-branding">
+                <h1>Sistema de Mantenimiento Digitalizado</h1>
+                <h2>European LifeStyle Suites & Gallery</h2>
+            </div>
             <div class="pills-container">
                 <span class="pill">Ventaja Competitiva</span>
                 <span class="pill">Control & Trazabilidad</span>
@@ -704,17 +725,17 @@
             
             // Initial load logic
             function initialLoad() {
-                let targetId = window.location.hash.substring(1);
+                const targetId = window.location.hash.substring(1);
 
-                // If the hash is missing or invalid, set it to the default and update URL
+                // If the hash is missing or invalid, set it to the default.
+                // This will trigger the hashchange listener which will update the view.
                 if (!validTargets.includes(targetId)) {
-                    targetId = 'introduccion';
-                    // Update hash without triggering hashchange event to avoid double-rendering
-                    history.replaceState(null, '', '#' + targetId);
+                    window.location.hash = 'introduccion';
+                } else {
+                    // If the hash is valid, the hashchange event won't fire on load,
+                    // so we need to manually update the view.
+                    updateView(targetId);
                 }
-                
-                // Directly render the correct view on initial load
-                updateView(targetId);
             }
 
             initialLoad();
