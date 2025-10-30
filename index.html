@@ -6,11 +6,13 @@
     <title>Propuesta CMMS | European LifeStyle Suites & Gallery</title>
     <style>
         :root {
-            --midnight-navy: #0E1A2B;
-            --sapphire-blue: #134E9B;
-            --slate-gray: #334155;
-            --smoke-white: #F4F6F8;
-            --white: #FFFFFF;
+            /* Paleta: Tech-Corporate 2.0 - Azul Eléctrico y Grafito */
+            --color-background: #1A202C; /* Grafito Intenso (Fondo) */
+            --color-panel: #2D3748;      /* Gris Acero (Fondo de Paneles) */
+            --color-primary: #007BFF;      /* Azul Eléctrico (Acentos) */
+            --color-text-primary: #E2E8F0; /* Gris Claro (Texto Principal) */
+            --color-text-headings: #FFFFFF; /* Blanco (Títulos) */
+            --color-border: #4A5568;      /* Gris para Bordes */
             --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
@@ -26,8 +28,8 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--smoke-white);
-            color: var(--slate-gray);
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -40,8 +42,8 @@
         }
 
         .header {
-            background-color: var(--midnight-navy);
-            color: var(--smoke-white);
+            background-color: var(--color-background);
+            color: var(--color-text-headings);
             padding: 1.5rem 0;
             text-align: center;
             transition: padding 0.3s ease-in-out;
@@ -53,25 +55,26 @@
             line-height: 1.2;
             max-width: 35ch;
             margin: 0 auto;
+            color: var(--color-text-headings);
         }
 
         .header h2 {
             font-size: 1rem;
             font-weight: 400;
-            color: var(--smoke-white);
+            color: var(--color-text-primary);
             opacity: 0.8;
             margin-top: 0.25rem;
         }
 
         .main-nav {
-            background-color: var(--white);
+            background-color: var(--color-panel);
             padding: 0.75rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--color-border);
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 10;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .nav-scroll-container {
@@ -87,7 +90,7 @@
         }
 
         .nav-scroll-container::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: var(--color-border);
             border-radius: 4px;
         }
 
@@ -95,10 +98,10 @@
             display: inline-block;
             padding: 0.6rem 1.2rem;
             margin: 0 0.25rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--color-border);
             border-radius: 8px;
-            background-color: var(--white);
-            color: var(--slate-gray);
+            background-color: transparent;
+            color: var(--color-text-primary);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
@@ -106,22 +109,22 @@
         }
 
         .nav-button:hover, .nav-button:focus-visible {
-            background-color: #eef2ff;
-            border-color: var(--sapphire-blue);
-            color: var(--sapphire-blue);
+            background-color: rgba(0, 123, 255, 0.1);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
             transform: translateY(-2px);
         }
 
         .nav-button:focus-visible {
-            outline: 2px solid var(--sapphire-blue);
+            outline: 2px solid var(--color-primary);
             outline-offset: 2px;
         }
 
         .nav-button.active {
-            background-color: var(--sapphire-blue);
-            color: var(--white);
-            border-color: var(--sapphire-blue);
-            box-shadow: 0 4px 12px -1px rgba(19, 78, 155, 0.3);
+            background-color: var(--color-primary);
+            color: var(--color-text-headings);
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 14px -2px rgba(0, 123, 255, 0.4);
             transform: translateY(-2px);
         }
 
@@ -130,9 +133,9 @@
         }
 
         .content-panel {
-            background-color: var(--white);
+            background-color: var(--color-panel);
             border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -150,18 +153,17 @@
             transition: opacity 0.3s ease-in-out, visibility 0s 0.3s;
         }
         
-        /* Make non-absolute for print and for dynamic height */
         .content-section.active {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
             transition: opacity 0.3s ease-in-out;
-            position: relative; /* Changed from absolute */
+            position: relative;
         }
         
         .content-section h3 {
             font-size: 1.85rem;
-            color: var(--midnight-navy);
+            color: var(--color-text-headings);
             margin-bottom: 2rem;
             display: flex;
             align-items: center;
@@ -193,10 +195,10 @@
             flex-shrink: 0;
             width: 24px;
             height: 24px;
-            stroke: var(--sapphire-blue);
+            stroke: var(--color-primary);
             stroke-width: 2;
             margin-top: 0.1rem;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .content-section li div {
@@ -206,7 +208,7 @@
         .content-section .icon {
             width: 36px;
             height: 36px;
-            stroke: var(--sapphire-blue);
+            stroke: var(--color-primary);
             stroke-width: 1.5;
         }
 
@@ -230,24 +232,25 @@
             flex-basis: 260px;
             text-align: center;
             padding: 2rem 1.5rem;
-            background-color: var(--smoke-white);
+            background-color: var(--color-background);
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--color-border);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
         }
 
         .objective-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+            border-color: var(--color-primary);
         }
         
         .objective-card h4 {
             font-size: 1.1rem;
-            color: var(--midnight-navy);
+            color: var(--color-text-headings);
             font-weight: 600;
             margin-top: 1rem;
         }
@@ -255,7 +258,7 @@
         .objective-icon {
             width: 40px;
             height: 40px;
-            stroke: var(--sapphire-blue);
+            stroke: var(--color-primary);
         }
 
         .pills-container {
@@ -267,34 +270,35 @@
         }
 
         .pill {
-            background-color: var(--smoke-white);
-            color: var(--slate-gray);
+            background-color: var(--color-panel);
+            color: var(--color-text-primary);
             padding: 0.5rem 1rem;
             border-radius: 9999px;
             font-size: 0.875rem;
             font-weight: 500;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--color-border);
         }
 
         .header .pill {
             background-color: transparent;
-            color: var(--smoke-white);
-            opacity: 0.8;
-            border-color: rgba(244, 246, 248, 0.4);
+            color: var(--color-text-primary);
+            opacity: 0.7;
+            border-color: rgba(74, 85, 104, 0.8);
             font-weight: 400;
             transition: all 0.2s ease-in-out;
         }
 
         .header .pill:hover {
-            background-color: rgba(244, 246, 248, 0.1);
-            border-color: rgba(244, 246, 248, 0.8);
+            background-color: rgba(226, 232, 240, 0.05);
+            border-color: rgba(226, 232, 240, 0.5);
             opacity: 1;
         }
         
         .kpi-tooltip {
             position: relative;
             cursor: help;
-            border-bottom: 1px dotted var(--slate-gray);
+            border-bottom: 1px dotted var(--color-primary);
+            color: var(--color-text-headings);
         }
 
         .kpi-tooltip::after {
@@ -303,8 +307,8 @@
             bottom: 125%;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--midnight-navy);
-            color: var(--white);
+            background-color: var(--color-background);
+            color: var(--color-text-headings);
             padding: 0.5rem 0.75rem;
             border-radius: 6px;
             font-size: 0.8rem;
@@ -318,16 +322,28 @@
             transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
             z-index: 10;
             pointer-events: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
         .kpi-tooltip em {
             font-style: italic;
+            color: var(--color-primary);
+            opacity: 0.9;
         }
 
         .kpi-tooltip:hover::after {
             opacity: 1;
             visibility: visible;
+        }
+        
+        strong, b {
+            color: var(--color-text-headings);
+            font-weight: 600;
+        }
+
+        em, i {
+            color: var(--color-primary);
+            font-style: normal;
         }
 
         @media (max-width: 768px) {
@@ -391,8 +407,16 @@
 
         @media print {
             body {
-                background-color: var(--white);
+                background-color: #FFFFFF;
                 color: #000;
+            }
+            :root {
+                --color-primary: #0052CC;
+                --color-background: #FFFFFF;
+                --color-panel: #F8F9FA;
+                --color-text-primary: #212529;
+                --color-text-headings: #000000;
+                --color-border: #DEE2E6;
             }
             .header, .main-nav {
                 display: none;
@@ -406,7 +430,7 @@
             }
             .content-panel {
                 box-shadow: none;
-                border: none;
+                border: 1px solid var(--color-border);
                 border-radius: 0;
                 padding: 0;
                 position: static;
@@ -420,9 +444,6 @@
             }
             .content-section:first-of-type {
                 page-break-before: auto;
-            }
-            h1, h2, h3 {
-              color: #000;
             }
         }
 
@@ -665,7 +686,7 @@
                         </li>
                         <li>
                             <svg class="bullet-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
-                            <div><strong>Medible y Sostenible:</strong> El enfoque basado en datos y KPIs asegura que la inversión se traduzca en <strong><em>resultados tangibles y demostrabes</em></strong>.</div>
+                            <div><strong>Medible y Sostenible:</strong> El enfoque basado en datos y KPIs asegura que la inversión se traduzca en <strong><em>resultados tangibles y demostrables</em></strong>.</div>
                         </li>
                         <li>
                             <svg class="bullet-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 100-13.5h9a9.75 9.75 0 000 13.5z" /><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6.375v5.25a.75.75 0 00.75.75h3a.75.75 0 000-1.5h-2.25V6.375a.75.75 0 00-1.5 0z" /></svg>
@@ -689,19 +710,16 @@
             ];
 
             function updateView(targetId) {
-                // Ensure targetId is valid, default to 'introduccion' if not
                 const finalTargetId = validTargets.includes(targetId) ? targetId : 'introduccion';
 
                 navButtons.forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.target === finalTargetId);
                 });
                 
-                // Hide all sections first
                 contentSections.forEach(section => {
                     section.classList.remove('active');
                 });
                 
-                // Then show the target section
                 const activeSection = document.getElementById(finalTargetId);
                 if (activeSection) {
                     activeSection.classList.add('active');
@@ -715,25 +733,18 @@
 
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    // Changing the hash will trigger the 'hashchange' event
                     window.location.hash = button.dataset.target;
                 });
             });
 
-            // Listen for hash changes to handle back/forward buttons and clicks
             window.addEventListener('hashchange', handleNavigation);
             
-            // Initial load logic
             function initialLoad() {
                 const targetId = window.location.hash.substring(1);
 
-                // If the hash is missing or invalid, set it to the default.
-                // This will trigger the hashchange listener which will update the view.
                 if (!validTargets.includes(targetId)) {
                     window.location.hash = 'introduccion';
                 } else {
-                    // If the hash is valid, the hashchange event won't fire on load,
-                    // so we need to manually update the view.
                     updateView(targetId);
                 }
             }
